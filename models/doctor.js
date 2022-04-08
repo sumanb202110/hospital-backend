@@ -1,4 +1,4 @@
-const {db} = require("../db");
+const {db} = require("../firebase");
 
 const Doctor = db.collection('doctor');
 

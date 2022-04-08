@@ -23,7 +23,21 @@ const createDoctor = async (req, res) => {
         res.status(400).json(err).send();
     }
 }
+
+const updateDoctor = async (req, res) => {
+    try{
+        const DoctorData = {
+            name: req.body.name
+        };
+
+
+        res.status(201).json(await doctor.updateDoctor(DoctorData));
+    }catch(err){
+        res.status(400).json(err).send();
+    }
+}
 module.exports = {
     getDoctors,
-    createDoctor
+    createDoctor,
+    updateDoctor
 }

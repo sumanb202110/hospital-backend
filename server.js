@@ -1,7 +1,8 @@
 const express = require("express");
 const dotenv = require("dotenv");
 
-const {doctorRouter} = require("./routes/doctorRoute")
+const {doctorRouter} = require("./routes/doctorRoute");
+const { authRouter } = require("./routes/authRoute");
 
 dotenv.config();
 
@@ -20,6 +21,8 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 app.use("/api/v1/doctors", doctorRouter);
+app.use("/api/v1/auth", authRouter);
+
 
 app.listen(port, () => {
     console.log(`Server starts at http://localhost:${port}`);

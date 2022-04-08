@@ -1,6 +1,7 @@
 const { Doctor } = require("../models/doctor");
 
 /**
+ * Get all doctors data
  * 
  * @param {Object} req 
  * @param {Object} res 
@@ -24,6 +25,7 @@ const getDoctors = async (req, res) => {
 };
 
 /**
+ * Create new doctor
  * 
  * @param {Object} doctorData 
  * @returns 
@@ -39,8 +41,25 @@ const createDoctor = async (doctorData) => {
     }
 };
 
+/**
+ * Update doctor data for a specific doctor
+ * @param {Object} doctorData 
+ * @returns 
+ */
+const updateDoctor = async (doctorData) => {
+    try {
+        // const response = await Doctor.set(doctorData);
+        return;
+    } catch (err) {
+        throw {
+            msg: "Error"
+        };
+    }
+}
+
 
 module.exports = {
     getDoctors,
-    createDoctor
+    createDoctor,
+    updateDoctor
 }
