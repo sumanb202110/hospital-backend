@@ -2,16 +2,18 @@ const {Router} = require("express");
 const doctorRouter = Router();
 const {getDoctors, createDoctor, updateDoctor} = require("../controllers/doctorController")
 const { body, validationResult } = require('express-validator');
+const { authCheck } = require("../middlewares/authCheck");
 
 /**
  * Get all doctors details
  */
-doctorRouter.route("/").get(getDoctors);
+doctorRouter.route("/").get(authCheck, getDoctors);
 
 /**
  * Create new doctor
  */
 doctorRouter.route("/").post(
+    authCheck,
     // name must be a string
     body('name').isString(),
     (req, res, next) => {
@@ -26,6 +28,7 @@ doctorRouter.route("/").post(
 );
 
 doctorRouter.route("/").patch(
+    authCheck,
     // name must be a string
     body('name').isString(),
     (req, res, next) => {

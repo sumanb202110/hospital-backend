@@ -1,5 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const swaggerUI = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
 
 const {doctorRouter} = require("./routes/doctorRoute");
 const { authRouter } = require("./routes/authRoute");
@@ -9,6 +11,9 @@ dotenv.config();
 const app = express();
 //eslint-disable-next-line
 const port = process.env.PORT || 4000;
+
+
+
 
 // Handle cors
 app.use((req, res, next) => {
@@ -20,6 +25,7 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use("/api/v1/doctors", doctorRouter);
 app.use("/api/v1/auth", authRouter);
 

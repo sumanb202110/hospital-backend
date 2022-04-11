@@ -31,7 +31,8 @@ const createUser = async (email, password, name) => {
 
 const revokeToken = async (uid) => {
     try{
-        await getAuth().revokeRefreshTokens(uid);
+        const response = await auth.revokeRefreshTokens(uid);
+        console.log("logout", uid);
         return; 
     }catch(err){
         console.log(err);

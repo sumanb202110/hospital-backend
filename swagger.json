@@ -1,0 +1,99 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Airport fuel inventory",
+      "description": "Airport fuel inventory app",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:4000"
+      }
+    ],
+    "tags": [
+      {
+        "name": "Doctors",
+        "description": "Doctors apis"
+      }
+    ],
+    "paths": {
+      "/api/v1/doctors": {
+        "description": "doctor",
+        "post": {
+          "summary": "doctor",
+          "tags": [
+            "Doctors"
+          ],
+          "description": "doctor",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/doctor"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "description": "message",
+                        "example": "Successfully created"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request"
+            },
+            "401": {
+              "description": "Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "msg": {
+                        "type": "string",
+                        "description": "message",
+                        "example": "message"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal Server Error"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "doctor": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "dr. gupta"
+            },
+            "email": {
+              "type": "string",
+              "example": "gupta@gt.com"
+            }
+          }
+        }
+      }
+    }
+  }
