@@ -22,7 +22,7 @@ const createDoctor = async (req, res) => {
     }catch(err){
         res.status(400).json(err).send();
     }
-}
+};
 
 const updateDoctor = async (req, res) => {
     try{
@@ -35,9 +35,9 @@ const updateDoctor = async (req, res) => {
     }catch(err){
         res.status(400).json(err).send();
     }
-}
+};
 module.exports = {
     getDoctors,
     createDoctor,
     updateDoctor
-}
+};

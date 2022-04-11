@@ -1,7 +1,7 @@
 const {Router} = require("express");
 const doctorRouter = Router();
-const {getDoctors, createDoctor, updateDoctor} = require("../controllers/doctorController")
-const { body, validationResult } = require('express-validator');
+const {getDoctors, createDoctor, updateDoctor} = require("../controllers/doctorController");
+const { body, validationResult } = require("express-validator");
 const { authCheck } = require("../middlewares/authCheck");
 
 /**
@@ -15,7 +15,7 @@ doctorRouter.route("/").get(authCheck, getDoctors);
 doctorRouter.route("/").post(
     authCheck,
     // name must be a string
-    body('name').isString(),
+    body("name").isString(),
     (req, res, next) => {
         // Finds the validation errors in this request and wraps them in an object with handy functions
         const errors = validationResult(req);
@@ -30,7 +30,7 @@ doctorRouter.route("/").post(
 doctorRouter.route("/").patch(
     authCheck,
     // name must be a string
-    body('name').isString(),
+    body("name").isString(),
     (req, res, next) => {
         // Finds the validation errors in this request and wraps them in an object with handy functions
         const errors = validationResult(req);
@@ -40,7 +40,7 @@ doctorRouter.route("/").patch(
         next();
     },
     updateDoctor
-)
+);
 
 module.exports = {
     doctorRouter

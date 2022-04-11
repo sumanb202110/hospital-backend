@@ -7,17 +7,16 @@ const { Doctor } = require("../models/doctor");
  * @param {Object} res 
  * @returns 
  */
-const getDoctors = async (req, res) => {
+const getDoctors = async () => {
     try {
         const snapshot = await Doctor.get();
-        return snapshot.docs.map((doc)=>{
+        return snapshot.docs.map((doc) => {
             return {
                 id: doc.id,
                 data: doc.data()
             };
         });
     } catch (err) {
-        console.log(err)
         throw {
             msg: "Error"
         };
@@ -32,7 +31,7 @@ const getDoctors = async (req, res) => {
  */
 const createDoctor = async (doctorData) => {
     try {
-        const response = await Doctor.add(doctorData);
+        await Doctor.add(doctorData);
         return;
     } catch (err) {
         throw {
@@ -46,20 +45,20 @@ const createDoctor = async (doctorData) => {
  * @param {Object} doctorData 
  * @returns 
  */
-const updateDoctor = async (doctorData) => {
+const updateDoctor = async () => {
     try {
         // const response = await Doctor.set(doctorData);
-        return;
+        // return;
     } catch (err) {
         throw {
             msg: "Error"
         };
     }
-}
+};
 
 
 module.exports = {
     getDoctors,
     createDoctor,
     updateDoctor
-}
+};

@@ -2,14 +2,14 @@ const { auth } = require("../firebase");
 
 const authCheck = async (req, res, next) => {
     try {
-        if (!req?.headers['authorization'] || !req?.headers['authorization'].split('Bearer ')[1]) {
+        if (!req?.headers["authorization"] || !req?.headers["authorization"].split("Bearer ")[1]) {
             return res.status(401).json({
                 msg: "unauthorized access"
             }).send();
         }
 
-        const authHeader = req?.headers['authorization'];
-        const idToken = authHeader && authHeader.split('Bearer ')[1];
+        const authHeader = req?.headers["authorization"];
+        const idToken = authHeader && authHeader.split("Bearer ")[1];
 
         if (idToken == null) {
             return res.status(401).json({
@@ -18,7 +18,7 @@ const authCheck = async (req, res, next) => {
         }
 
         const checkRevoked = true;
-        const decodedToken = await auth.verifyIdToken(idToken, checkRevoked)
+        const decodedToken = await auth.verifyIdToken(idToken, checkRevoked);
         const uid = decodedToken.uid;
         
         req.uid = uid;

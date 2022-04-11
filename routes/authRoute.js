@@ -1,6 +1,5 @@
 const {Router} = require("express");
 const authRouter = Router();
-const { body, validationResult } = require('express-validator');
 const { createUser, login, logout } = require("../controllers/authController");
 const { authCheck } = require("../middlewares/authCheck");
 
@@ -16,4 +15,4 @@ authRouter.route("/logout").post(authCheck, logout);
 
 module.exports = {
     authRouter
-}
+};

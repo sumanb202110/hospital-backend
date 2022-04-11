@@ -1,4 +1,4 @@
-const user = require("../services/auth.service")
+const user = require("../services/auth.service");
 
 const createUser = async (req, res) => {
     try{
@@ -6,7 +6,7 @@ const createUser = async (req, res) => {
     }catch(err){
         console.log(err);
     }
-}
+};
 
 const login = async (req, res) => {
     try{
@@ -14,7 +14,7 @@ const login = async (req, res) => {
     }catch(err){
         console.log(err);
     }
-}
+};
 
 const logout = async(req, res) => {
     try{
@@ -23,10 +23,10 @@ const logout = async(req, res) => {
     }catch(err){
         console.log(err);
     }
-}
+};
 
 module.exports = {
     createUser,
     login,
     logout
-}
+};
