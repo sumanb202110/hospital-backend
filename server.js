@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const swaggerUI = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 
+const logger = require("./logger");
 const {doctorRouter} = require("./routes/doctorRoute");
 const { authRouter } = require("./routes/authRoute");
 
@@ -31,5 +32,5 @@ app.use("/api/v1/auth", authRouter);
 
 
 app.listen(port, () => {
-    console.log(`Server starts at http://localhost:${port}`);
+    logger.info(`Server starts at http://localhost:${port}`);
 });

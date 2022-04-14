@@ -1,5 +1,7 @@
 const { auth } = require("../firebase");
 const axios = require("axios");
+const logger = require("../logger");
+
 
 const login = async (email, password) => {
     //eslint-disable-next-line
@@ -13,7 +15,7 @@ const login = async (email, password) => {
         });
         return response.data;
     }catch(err){
-        console.log("login error", err);
+        logger.error("login error", err);
     }
 };
 
@@ -26,7 +28,7 @@ const createUser = async (email, password, name) => {
         });
         return response;
     }catch(error){
-        console.log("Error creating new user:", error);
+        logger.error("Error creating new user:", error);
     }
 };
 
@@ -35,7 +37,7 @@ const revokeToken = async (uid) => {
         await auth.revokeRefreshTokens(uid);
         return; 
     }catch(err){
-        console.log(err);
+        logger.error(err);
     }
 };
 module.exports = {
