@@ -1,14 +1,14 @@
 const {Router} = require("express");
-const doctorRouter = Router();
-const {getDoctors, createDoctor, updateDoctor, deleteDoctor, getDoctorById} = require("../controllers/doctorController");
+const patientRouter = Router();
+const {getPatients, createPatient, updatePatient, deletePatient, getPatientById} = require("../controllers/patientController");
 const { body, validationResult, param } = require("express-validator");
 const { authCheck } = require("../middlewares/authCheck");
 
 /**
- * Get all doctors details
+ * Get all patients details
  */
-doctorRouter.route("/").get(authCheck, getDoctors);
-doctorRouter.route("/:id").get(
+patientRouter.route("/").get(authCheck, getPatients);
+patientRouter.route("/:id").get(
     authCheck,
     // id must be a string
     param("id").isString(),
@@ -20,29 +20,27 @@ doctorRouter.route("/:id").get(
         }
         next();
     },
-    getDoctorById
+    getPatientById
 );
 
 
 /**
  * Create new doctor
  */
-doctorRouter.route("/").post(
+patientRouter.route("/").post(
     authCheck,
     // id must be string
     body("id").isString(),
     // name must be a string
     body("name").isString(),
-    // description must be string
-    body("description").isString(),
     // phone no as per rule
     body("phone").isMobilePhone(),
     // email must be as per rule
     body("email").isEmail(),
-    // education must be string
-    body("education").isString(),
-    // location must be string
-    body("location").isString(),
+    // DOB must be date
+    body("dob").isDate(),
+    // address must be string
+    body("address").isString(),
     (req, res, next) => {
         // Finds the validation errors in this request and wraps them in an object with handy functions
         const errors = validationResult(req);
@@ -51,25 +49,23 @@ doctorRouter.route("/").post(
         }
         next();
     },
-    createDoctor
+    createPatient
 );
 
-doctorRouter.route("/:id").patch(
+patientRouter.route("/:id").patch(
     authCheck,
-    // id must be a string
-    param("id").isString(),
+    // id must be string
+    body("id").isString(),
     // name must be a string
     body("name").isString(),
-    // description must be string
-    body("description").isString(),
     // phone no as per rule
     body("phone").isMobilePhone(),
     // email must be as per rule
     body("email").isEmail(),
-    // education must be string
-    body("education").isString(),
-    // location must be string
-    body("location").isString(),
+    // DOB must be date
+    body("dob").isDate(),
+    // address must be string
+    body("address").isString(),
     (req, res, next) => {
         // Finds the validation errors in this request and wraps them in an object with handy functions
         const errors = validationResult(req);
@@ -78,10 +74,10 @@ doctorRouter.route("/:id").patch(
         }
         next();
     },
-    updateDoctor
+    updatePatient
 );
 
-doctorRouter.route("/:id").delete(
+patientRouter.route("/:id").delete(
     authCheck,
     // id must be a string
     param("id").isString(),
@@ -93,9 +89,9 @@ doctorRouter.route("/:id").delete(
         }
         next();
     },
-    deleteDoctor
+    deletePatient
 );
 
 module.exports = {
-    doctorRouter
+    patientRouter
 };

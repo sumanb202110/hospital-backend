@@ -1,4 +1,6 @@
 const { auth } = require("../firebase");
+const logger = require("../logger");
+
 
 const authCheck = async (req, res, next) => {
     try {
@@ -25,7 +27,7 @@ const authCheck = async (req, res, next) => {
         next();
 
     } catch (err) {
-        console.log(err);
+        logger.error(err);
         return res.status(401).json({
             msg: "unauthorized access"
         }).send();

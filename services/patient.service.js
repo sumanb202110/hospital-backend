@@ -1,4 +1,4 @@
-const { Doctor } = require("../models/doctor");
+const { Patient } = require("../models/patient");
 const logger = require("../logger");
 
 /**
@@ -8,9 +8,9 @@ const logger = require("../logger");
  * @param {Object} res 
  * @returns 
  */
-const getDoctors = async (page, count) => {
+const getPatients = async (page, count) => {
     try {
-        const snapshot = await Doctor
+        const snapshot = await Patient
             .offset((page-1)*count)
             .limit(count)
             .get();
@@ -32,9 +32,9 @@ const getDoctors = async (page, count) => {
     }
 };
 
-const getDoctorById = async (id) => {
+const getPatientById = async (id) => {
     try {
-        const response = await (await Doctor.doc(id).get()).data();
+        const response = await (await Patient.doc(id).get()).data();
         return response;
     } catch (err) {
         logger.error(err);
@@ -45,14 +45,14 @@ const getDoctorById = async (id) => {
 };
 
 /**
- * Create new doctor
+ * Create new patient
  * 
- * @param {Object} doctorData 
+ * @param {Object} patientData 
  * @returns 
  */
-const createDoctor = async (id,doctorData) => {
+const createPatient = async (id, patientData) => {
     try {
-        await Doctor.doc(id).set(doctorData);
+        await Patient.doc(id).set(patientData);
         return;
     } catch (err) {
         logger.error(err);
@@ -63,13 +63,13 @@ const createDoctor = async (id,doctorData) => {
 };
 
 /**
- * Update doctor data for a specific doctor
- * @param {Object} doctorData 
+ * Update patient data for a specific patient
+ * @param {Object} patientData 
  * @returns 
  */
-const updateDoctor = async (id,doctorData) => {
+const updatePatient = async (id, patientData) => {
     try {
-        await Doctor.doc(id).set(doctorData);
+        await Patient.doc(id).set(patientData);
         return "Successfully updated";
     } catch (err) {
         logger.error(err);
@@ -79,9 +79,9 @@ const updateDoctor = async (id,doctorData) => {
     }
 };
 
-const deleteDoctor = async (id) => {
+const deletePatient = async (id) => {
     try {
-        await Doctor.doc(id).delete();
+        await Patient.doc(id).delete();
         return;
     } catch (err) {
         logger.error(err);
@@ -93,9 +93,9 @@ const deleteDoctor = async (id) => {
 
 
 module.exports = {
-    getDoctors,
-    createDoctor,
-    updateDoctor,
-    deleteDoctor,
-    getDoctorById
+    getPatients,
+    createPatient,
+    updatePatient,
+    deletePatient,
+    getPatientById
 };
