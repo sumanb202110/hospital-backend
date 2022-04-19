@@ -11,7 +11,7 @@ const logger = require("../logger");
 const getPescriptions = async (page, count) => {
     try {
         const snapshot = await Pescription
-            .offset((page-1)*count)
+            .offset((page - 1) * count)
             .limit(count)
             .get();
         return {

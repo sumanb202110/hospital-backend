@@ -33,12 +33,23 @@ pescriptionRouter.route("/").post(
     body("patientId").isString(),
     // doctor id must be a string
     body("doctorId").isString(),
-    // madcinis must be array of objects
-    body("medicines").isArray(),
+    // medicines must be array of objects
+    body("medicines").isArray(Object),
+    // medicine name must be string
+    body("medicines.*.name").isString(),
+    // medicine dose must be string
+    body("medicines.*.dose").isString(),
+    // medicine duration must be string
+    body("medicines.*.duration").isNumeric(),
+    // medicine other must be string
+    body("medicines.*.other").isString(),
     // temp must be decimal
     body("temp").isDecimal(),
-    // bp must be number
-    body("bp").isNumeric(),
+    // bp must be object
+    body("bp").isObject({
+        upper: Number,
+        lower: Number
+    }),
     (req, res, next) => {
         // Finds the validation errors in this request and wraps them in an object with handy functions
         const errors = validationResult(req);

@@ -1,5 +1,7 @@
 const pescription = require("../services/pescription.service");
 const logger = require("../logger");
+const { getDoctorById } = require("../services/doctor.service");
+const { getPatientById } = require("../services/patient.service");
 
 
 const getPescriptions = async (req, res) => {
@@ -34,8 +36,14 @@ const createPescription = async (req, res) => {
             bp: req.body.bp
         };
 
+        const doctorData = await getDoctorById(PescriptionData.doctorId);
+        const patientData = await getPatientById(PescriptionData.patientId);
+        if(doctorData.name != "" && doctorData.name != undefined){
+            if(patientData.name != "" && patientData.name != undefined){
+                res.status(201).json(await pescription.createPescription(`PR${Date.now().toString(16)}`, PescriptionData));
+            }
+        } 
 
-        res.status(201).json(await pescription.createPescription(req.body.id, PescriptionData));
     }catch(err){
         logger.error(err);
         res.status(400).json(err).send();

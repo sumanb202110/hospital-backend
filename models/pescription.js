@@ -1,7 +1,7 @@
 const {db} = require("../firebase");
 
-const Doctor = db.collection("doctor");
+const Pescription = db.collection("pescription");
 
 module.exports = {
-    Doctor
+    Pescription
 };

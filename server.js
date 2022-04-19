@@ -31,7 +31,7 @@ app.use(express.json());
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use("/api/v1/doctors", doctorRouter);
 app.use("/api/v1/patients", patientRouter);
-app.use("/api/v1/pescription", pescriptionRouter);
+app.use("/api/v1/pescriptions", pescriptionRouter);
 
 
 app.use("/api/v1/auth", authRouter);
