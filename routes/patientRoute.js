@@ -29,8 +29,6 @@ patientRouter.route("/:id").get(
  */
 patientRouter.route("/").post(
     authCheck,
-    // id must be string
-    body("id").isString(),
     // name must be a string
     body("name").isString(),
     // phone no as per rule

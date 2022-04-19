@@ -34,7 +34,7 @@ const createPatient = async (req, res) => {
         };
 
 
-        res.status(201).json(await patient.createPatient(req.body.id, PatientData));
+        res.status(201).json(await patient.createPatient(`P${Date.now().toString(16)}`, PatientData));
     }catch(err){
         logger.error(err);
         res.status(400).json(err).send();
