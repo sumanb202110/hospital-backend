@@ -60,8 +60,13 @@ const updatePescription = async (req, res) => {
             temp: req.body.temp,
             bp: req.body.bp
         };
-
-        res.status(200).json(await pescription.updatePescription(req.params.id, PescriptionData));
+        const doctorData = await getDoctorById(PescriptionData.doctorId);
+        const patientData = await getPatientById(PescriptionData.patientId);
+        if(doctorData.name != "" && doctorData.name != undefined){
+            if(patientData.name != "" && patientData.name != undefined){
+                res.status(200).json(await pescription.updatePescription(req.params.id, PescriptionData));
+            }
+        } 
     }catch(err){
         logger.error(err);
         res.status(400).json(err).send();
