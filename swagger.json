@@ -1,31 +1,190 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-      "title": "Airport fuel inventory",
-      "description": "Airport fuel inventory app",
-      "version": "1.0.0"
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Hospital Management System",
+    "description": "Hospital management system",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4000"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Doctors",
+      "description": "Doctors apis"
+    }
+  ],
+  "paths": {
+    "/api/v1/doctors": {
+      "description": "doctor",
+      "get": {
+        "summary": "get doctors details",
+        "tags": [
+          "Doctors"
+        ],
+        "description": "Get doctors details",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Page number"
+          },
+          {
+            "in": "query",
+            "name": "count",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Items per page"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "number",
+                      "example": 10
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "data": {
+                            "$ref": "#/components/schemas/doctor"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized Error"
+          }
+        }
+      },
+      "post": {
+        "summary": "create doctor",
+        "tags": [
+          "Doctors"
+        ],
+        "description": "create doctor",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/doctor"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "description": "message",
+                      "example": "message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "get doctors details",
+        "tags": [
+          "Doctors"
+        ],
+        "description": "Get doctors details",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Page number"
+          },
+          {
+            "in": "query",
+            "name": "count",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Items per page"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized Error"
+          }
+        }
+      }
     },
-    "servers": [
-      {
-        "url": "http://localhost:4000"
-      }
-    ],
-    "tags": [
-      {
-        "name": "Doctors",
-        "description": "Doctors apis"
-      }
-    ],
-    "paths": {
-      "/api/v1/doctors": {
-        "description": "doctor",
-        "post": {
-          "summary": "doctor",
-          "tags": [
-            "Doctors"
-          ],
-          "description": "doctor",
-          "requestBody": {
+    "/api/v1/doctors/{doctorId}": {
+      "description": "doctor",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "doctorId",
+          "schema": {
+            "type": "string"
+          },
+          "required": true,
+          "description": "ID of the doctor to"
+        }
+      ],
+      "get": {
+        "summary": "get doctors details",
+        "tags": [
+          "Doctors"
+        ],
+        "description": "Get doctors details",
+        "responses": {
+          "200": {
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -34,66 +193,92 @@
               }
             }
           },
-          "responses": {
-            "201": {
-              "description": "Success",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "msg": {
-                        "type": "string",
-                        "description": "message",
-                        "example": "Successfully created"
-                      }
-                    }
-                  }
-                }
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized Error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "update doctor",
+        "tags": [
+          "Doctors"
+        ],
+        "description": "update doctor",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/doctor"
               }
-            },
-            "400": {
-              "description": "Bad Request"
-            },
-            "401": {
-              "description": "Error",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "msg": {
-                        "type": "string",
-                        "description": "message",
-                        "example": "message"
-                      }
-                    }
-                  }
-                }
-              }
-            },
-            "500": {
-              "description": "Internal Server Error"
             }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "description": "message",
+                      "example": "message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
-    },
-    "components": {
-      "schemas": {
-        "doctor": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "example": "dr. gupta"
-            },
-            "email": {
-              "type": "string",
-              "example": "gupta@gt.com"
-            }
+    }
+  },
+  "components": {
+    "schemas": {
+      "doctor": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "dr. gupta"
+          },
+          "email": {
+            "type": "string",
+            "example": "gupta@gt.com"
+          },
+          "description": {
+            "type": "string",
+            "example": "dr"
+          },
+          "location": {
+            "type": "string",
+            "example": "bhubaneswar"
+          },
+          "education": {
+            "type": "string",
+            "example": "M.B.B.S"
+          },
+          "phone": {
+            "type": "string",
+            "pattern": "((\\+*)((0[ -]*)*|((91 )*))((\\d{12})+|(\\d{10})+))|\\d{5}([- ]*)\\d{6}",
+            "example": 9999584975
           }
         }
       }
     }
   }
+}
