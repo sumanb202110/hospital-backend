@@ -29,8 +29,6 @@ doctorRouter.route("/:id").get(
  */
 doctorRouter.route("/").post(
     authCheck,
-    // id must be string
-    body("id").isString(),
     // name must be a string
     body("name").isString(),
     // description must be string
