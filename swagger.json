@@ -14,6 +14,14 @@
     {
       "name": "Doctors",
       "description": "Doctors apis"
+    },
+    {
+      "name": "Patients",
+      "description": "Patients apis"
+    },
+    {
+      "name": "Pescriptions",
+      "description": "Pescription apis"
     }
   ],
   "paths": {
@@ -61,7 +69,8 @@
                         "type": "object",
                         "properties": {
                           "id": {
-                            "type": "string"
+                            "type": "string",
+                            "example": "D213j3jjk"
                           },
                           "data": {
                             "$ref": "#/components/schemas/doctor"
@@ -125,42 +134,6 @@
             "description": "Internal Server Error"
           }
         }
-      },
-      "delete": {
-        "summary": "get doctors details",
-        "tags": [
-          "Doctors"
-        ],
-        "description": "Get doctors details",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "page",
-            "schema": {
-              "type": "integer"
-            },
-            "description": "Page number"
-          },
-          {
-            "in": "query",
-            "name": "count",
-            "schema": {
-              "type": "integer"
-            },
-            "description": "Items per page"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Success"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized Error"
-          }
-        }
       }
     },
     "/api/v1/doctors/{doctorId}": {
@@ -173,7 +146,7 @@
             "type": "string"
           },
           "required": true,
-          "description": "ID of the doctor to"
+          "description": "ID of the doctor"
         }
       ],
       "get": {
@@ -244,6 +217,448 @@
             "description": "Internal Server Error"
           }
         }
+      },
+      "delete": {
+        "summary": "delete doctors details",
+        "tags": [
+          "Doctors"
+        ],
+        "description": "Delete doctors details",
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized Error"
+          }
+        }
+      }
+    },
+    "/api/v1/patients": {
+      "description": "patient",
+      "get": {
+        "summary": "get patients details",
+        "tags": [
+          "Patients"
+        ],
+        "description": "Get patients details",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Page number"
+          },
+          {
+            "in": "query",
+            "name": "count",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Items per page"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "number",
+                      "example": 10
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "P23hsd657"
+                          },
+                          "data": {
+                            "$ref": "#/components/schemas/patient"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized Error"
+          }
+        }
+      },
+      "post": {
+        "summary": "create patient",
+        "tags": [
+          "Patients"
+        ],
+        "description": "create patient",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/patient"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "description": "message",
+                      "example": "message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/patients/{patientId}": {
+      "description": "patient",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "patientId",
+          "schema": {
+            "type": "string"
+          },
+          "required": true,
+          "description": "ID of the patient"
+        }
+      ],
+      "get": {
+        "summary": "get patients details",
+        "tags": [
+          "Patients"
+        ],
+        "description": "Get patients details",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/patient"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized Error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "update patient",
+        "tags": [
+          "Patients"
+        ],
+        "description": "update patient",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/patient"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "description": "message",
+                      "example": "message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete patient details",
+        "tags": [
+          "Patients"
+        ],
+        "description": "Delete patient details",
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized Error"
+          }
+        }
+      }
+    },
+    "/api/v1/pescriptions": {
+      "description": "pescription",
+      "get": {
+        "summary": "get pescriptions details",
+        "tags": [
+          "Pescriptions"
+        ],
+        "description": "Get pescriptionss details",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Page number"
+          },
+          {
+            "in": "query",
+            "name": "count",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Items per page"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "number",
+                      "example": 10
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "P23hsd657"
+                          },
+                          "data": {
+                            "$ref": "#/components/schemas/pescription"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized Error"
+          }
+        }
+      },
+      "post": {
+        "summary": "create pescription",
+        "tags": [
+          "Pescriptions"
+        ],
+        "description": "create pescription",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/pescription"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "description": "message",
+                      "example": "message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/pescriptions/{pescriptionId}": {
+      "description": "pescription",
+      "parameters": [
+        {
+          "in": "path",
+          "name": "pescriptionId",
+          "schema": {
+            "type": "string"
+          },
+          "required": true,
+          "description": "ID of the pescription"
+        }
+      ],
+      "get": {
+        "summary": "get pescriptions details",
+        "tags": [
+          "Pescriptions"
+        ],
+        "description": "Get pescriptions details",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/pescription"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized Error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "update pescription",
+        "tags": [
+          "Pescriptions"
+        ],
+        "description": "update pescription",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/pescription"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "description": "message",
+                      "example": "message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "delete pescription details",
+        "tags": [
+          "Pescriptions"
+        ],
+        "description": "delete pescription details",
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized Error"
+          }
+        }
       }
     }
   },
@@ -276,6 +691,92 @@
             "type": "string",
             "pattern": "((\\+*)((0[ -]*)*|((91 )*))((\\d{12})+|(\\d{10})+))|\\d{5}([- ]*)\\d{6}",
             "example": 9999584975
+          }
+        }
+      },
+      "patient": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "d ray"
+          },
+          "email": {
+            "type": "string",
+            "example": "d.ray@eg.cim"
+          },
+          "phone": {
+            "type": "string",
+            "pattern": "((\\+*)((0[ -]*)*|((91 )*))((\\d{12})+|(\\d{10})+))|\\d{5}([- ]*)\\d{6}",
+            "example": 9999584975
+          },
+          "dob": {
+            "type": "string",
+            "format": "date",
+            "example": "17-02-1998"
+          },
+          "address": {
+            "type": "string",
+            "example": "bhubaneswar"
+          }
+        }
+      },
+      "pescription": {
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "example": "P64624"
+          },
+          "doctorId": {
+            "type": "string",
+            "example": "D43784"
+          },
+          "medicines": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "sds"
+                },
+                "dose": {
+                  "type": "string",
+                  "example": "daily"
+                },
+                "duration": {
+                  "type": "number",
+                  "example": 7
+                },
+                "other": {
+                  "type": "string",
+                  "example": "other"
+                }
+              }
+            }
+          },
+          "time": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-07-21T17:32:28.000Z"
+          },
+          "temp": {
+            "type": "number",
+            "example": 97
+          },
+          "bp": {
+            "type": "object",
+            "properties": {
+              "upper": {
+                "type": "number",
+                "example": 120
+              },
+              "lower": {
+                "type": "number",
+                "example": 80
+              }
+            }
           }
         }
       }
