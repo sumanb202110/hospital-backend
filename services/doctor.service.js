@@ -8,12 +8,28 @@ const logger = require("../logger");
  * @param {Object} res 
  * @returns 
  */
-const getDoctors = async (page, count) => {
+const getDoctors = async (page, count, sortBy) => {
     try {
-        const snapshot = await Doctor
-            .offset((page-1)*count)
-            .limit(count)
-            .get();
+        let snapshot;
+        if (sortBy == "name") {
+            snapshot = await Doctor
+                .orderBy("name")
+                .offset((page - 1) * count)
+                .limit(count)
+                .get();
+        }else if (sortBy == "location") {
+            snapshot = await Doctor
+                .orderBy("name")
+                .offset((page - 1) * count)
+                .limit(count)
+                .get();
+        } else {
+            snapshot = await Doctor
+                .offset((page - 1) * count)
+                .limit(count)
+                .get();
+        }
+
         return {
             count: snapshot.size,
             data: snapshot.docs.map((doc) => {
@@ -50,7 +66,7 @@ const getDoctorById = async (id) => {
  * @param {Object} doctorData 
  * @returns 
  */
-const createDoctor = async (id,doctorData) => {
+const createDoctor = async (id, doctorData) => {
     try {
         await Doctor.doc(id).set(doctorData);
         return;
@@ -67,7 +83,7 @@ const createDoctor = async (id,doctorData) => {
  * @param {Object} doctorData 
  * @returns 
  */
-const updateDoctor = async (id,doctorData) => {
+const updateDoctor = async (id, doctorData) => {
     try {
         await Doctor.doc(id).set(doctorData);
         return "Successfully updated";
