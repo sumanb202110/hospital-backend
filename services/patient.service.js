@@ -8,12 +8,26 @@ const logger = require("../logger");
  * @param {Object} res 
  * @returns 
  */
-const getPatients = async (page, count) => {
+const getPatients = async (page, count, sortBy, name) => {
     try {
-        const snapshot = await Patient
-            .offset((page-1)*count)
+        let snapshot = await Patient;
+
+        if (name != undefined && name != "") {
+            snapshot = await snapshot.where("name", "==", name);
+        }
+
+
+        if (sortBy == "name" && !(name != undefined && name != "")) {
+            snapshot = await snapshot.orderBy("name");
+
+        }
+
+        snapshot = await snapshot
+            .offset((page - 1) * count)
             .limit(count)
             .get();
+
+
         return {
             count: snapshot.size,
             data: snapshot.docs.map((doc) => {

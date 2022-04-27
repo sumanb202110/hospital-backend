@@ -5,9 +5,11 @@ const logger = require("../logger");
 const getPatients = async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const count = parseInt(req.query.count) || 100;
+    const sortBy = req.query.sortBy;
+    const name = req.query.name;
 
     try{
-        res.status(200).json(await patient.getPatients(page, count));
+        res.status(200).json(await patient.getPatients(page, count, sortBy, name));
     } catch (err) {
         logger.error(err);
         res.status(400).json(err).send();
