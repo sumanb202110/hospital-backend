@@ -8,27 +8,30 @@ const logger = require("../logger");
  * @param {Object} res 
  * @returns 
  */
-const getDoctors = async (page, count, sortBy) => {
+const getDoctors = async (page, count, sortBy, name, location) => {
     try {
-        let snapshot;
-        if (sortBy == "name") {
-            snapshot = await Doctor
-                .orderBy("name")
-                .offset((page - 1) * count)
-                .limit(count)
-                .get();
-        }else if (sortBy == "location") {
-            snapshot = await Doctor
-                .orderBy("name")
-                .offset((page - 1) * count)
-                .limit(count)
-                .get();
-        } else {
-            snapshot = await Doctor
-                .offset((page - 1) * count)
-                .limit(count)
-                .get();
+        let snapshot = await Doctor;
+
+        if (name != undefined && name != "") {
+            snapshot = await snapshot.where("name", "==", name);
         }
+
+        if (location != undefined && location != "") {
+            snapshot = await snapshot
+                .where("location", "==", location);
+        }
+
+        if (sortBy == "name" && !(name != undefined && name != "")) {
+            snapshot = await snapshot.orderBy("name");
+
+        } else if (sortBy == "location" && !(location != undefined && location != "")) {
+            snapshot = await snapshot.orderBy("location");
+        }
+
+        snapshot = await snapshot
+            .offset((page - 1) * count)
+            .limit(count)
+            .get();
 
         return {
             count: snapshot.size,

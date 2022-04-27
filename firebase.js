@@ -8,8 +8,10 @@ admin.initializeApp({
 
 const db = admin.firestore();
 const auth = admin.auth();
+const messaging = admin.messaging();
 
 module.exports = {
     db,
-    auth
+    auth,
+    messaging
 };
