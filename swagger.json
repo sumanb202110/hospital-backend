@@ -49,6 +49,37 @@
               "type": "integer"
             },
             "description": "Items per page"
+          },
+          {
+            "in": "query",
+            "name": "sortBy",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "name",
+                "location"
+              ],
+              "default": "name"
+            },
+            "description": "sort by"
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "schema": {
+              "type": "string",
+              "example": "dr das"
+            },
+            "description": "filter name"
+          },
+          {
+            "in": "query",
+            "name": "location",
+            "schema": {
+              "type": "string",
+              "example": "bhubaneswar"
+            },
+            "description": "filter location"
           }
         ],
         "responses": {
@@ -261,6 +292,27 @@
               "type": "integer"
             },
             "description": "Items per page"
+          },
+          {
+            "in": "query",
+            "name": "sortBy",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "name"
+              ],
+              "default": "name"
+            },
+            "description": "sort by"
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "schema": {
+              "type": "string",
+              "example": "r ray"
+            },
+            "description": "filter by name"
           }
         ],
         "responses": {
