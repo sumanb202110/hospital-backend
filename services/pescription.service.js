@@ -32,6 +32,12 @@ const getPescriptions = async (page, count) => {
     }
 };
 
+/**
+ * get specific pascription details by id
+ * 
+ * @param {string} id 
+ * @returns 
+ */
 const getPescriptionById = async (id) => {
     try {
         const response = await (await Pescription.doc(id).get()).data();
@@ -63,8 +69,9 @@ const createPescription = async (id, pescriptionData) => {
 };
 
 /**
- * Update doctor data for a specific doctor
+ * Update pescription data for a specific pescription
  * @param {Object} pescriptionData 
+ * @param {id} string
  * @returns 
  */
 const updatePescription = async (id, pescriptionData) => {
@@ -79,6 +86,12 @@ const updatePescription = async (id, pescriptionData) => {
     }
 };
 
+/**
+ * delete pescription
+ * 
+ * @param {string} id 
+ * @returns 
+ */
 const deletePescription = async (id) => {
     try {
         await Pescription.doc(id).delete();

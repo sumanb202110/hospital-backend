@@ -3,6 +3,13 @@ const axios = require("axios");
 const logger = require("../logger");
 
 
+/**
+ * login service
+ * 
+ * @param {string} email 
+ * @param {string} password 
+ * @returns 
+ */
 const login = async (email, password) => {
     //eslint-disable-next-line
     const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.FIREBASE_API_KEY}`;
@@ -20,6 +27,14 @@ const login = async (email, password) => {
     }
 };
 
+/**
+ * create new user function
+ * 
+ * @param {string} email 
+ * @param {string} password 
+ * @param {string} name 
+ * @returns 
+ */
 const createUser = async (email, password, name) => {
     try {
         const response = await auth.createUser({
@@ -33,6 +48,12 @@ const createUser = async (email, password, name) => {
     }
 };
 
+/**
+ * revoke token function
+ * 
+ * @param {string} uid 
+ * @returns 
+ */
 const revokeToken = async (uid) => {
     try {
         await auth.revokeRefreshTokens(uid);
@@ -41,6 +62,7 @@ const revokeToken = async (uid) => {
         logger.error(err);
     }
 };
+
 module.exports = {
     createUser,
     login,

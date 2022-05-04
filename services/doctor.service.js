@@ -51,6 +51,12 @@ const getDoctors = async (page, count, sortBy, name, location) => {
     }
 };
 
+/**
+ * get doctor details by id function
+ * 
+ * @param {string} id 
+ * @returns 
+ */
 const getDoctorById = async (id) => {
     try {
         const response = await (await Doctor.doc(id).get()).data();
@@ -98,6 +104,12 @@ const updateDoctor = async (id, doctorData) => {
     }
 };
 
+/**
+ * delete doctor
+ * 
+ * @param {string} id 
+ * @returns 
+ */
 const deleteDoctor = async (id) => {
     try {
         await Doctor.doc(id).delete();

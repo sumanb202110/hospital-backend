@@ -2,7 +2,7 @@ const { Patient } = require("../models/patient");
 const logger = require("../logger");
 
 /**
- * Get all doctors data
+ * Get all patients data
  * 
  * @param {Object} req 
  * @param {Object} res 
@@ -46,6 +46,12 @@ const getPatients = async (page, count, sortBy, name) => {
     }
 };
 
+/**
+ * get patient details by id
+ * 
+ * @param {string} id 
+ * @returns 
+ */
 const getPatientById = async (id) => {
     try {
         const response = await (await Patient.doc(id).get()).data();
@@ -93,6 +99,12 @@ const updatePatient = async (id, patientData) => {
     }
 };
 
+/**
+ * delete patinet
+ * 
+ * @param {string} id 
+ * @returns 
+ */
 const deletePatient = async (id) => {
     try {
         await Patient.doc(id).delete();
