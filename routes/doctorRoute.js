@@ -52,6 +52,9 @@ doctorRouter.route("/").post(
     createDoctor
 );
 
+/**
+ * update doctor route
+ */
 doctorRouter.route("/:id").patch(
     authCheck,
     // id must be a string
@@ -79,6 +82,9 @@ doctorRouter.route("/:id").patch(
     updateDoctor
 );
 
+/**
+ * delete doctor route
+ */
 doctorRouter.route("/:id").delete(
     authCheck,
     // id must be a string

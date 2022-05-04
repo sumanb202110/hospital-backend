@@ -1,7 +1,14 @@
 const { auth } = require("../firebase");
 const logger = require("../logger");
 
-
+/**
+ * check auth for protected routes
+ * 
+ * @param {object} req 
+ * @param {object} res 
+ * @param {function} next 
+ * @returns 
+ */
 const authCheck = async (req, res, next) => {
     try {
         if (!req?.headers["authorization"] || !req?.headers["authorization"].split("Bearer ")[1]) {

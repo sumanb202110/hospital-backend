@@ -25,7 +25,7 @@ patientRouter.route("/:id").get(
 
 
 /**
- * Create new doctor
+ * Create new patient
  */
 patientRouter.route("/").post(
     authCheck,
@@ -50,6 +50,9 @@ patientRouter.route("/").post(
     createPatient
 );
 
+/**
+ * update patient route
+ */
 patientRouter.route("/:id").patch(
     authCheck,
     // id must be string
@@ -75,6 +78,9 @@ patientRouter.route("/:id").patch(
     updatePatient
 );
 
+/**
+ * delete patient route
+ */
 patientRouter.route("/:id").delete(
     authCheck,
     // id must be a string

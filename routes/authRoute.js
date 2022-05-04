@@ -4,10 +4,18 @@ const { createUser, login, logout } = require("../controllers/authController");
 const { authCheck } = require("../middlewares/authCheck");
 
 /**
- * Get all doctors details
+ * Signup route
  */
 authRouter.route("/signup").post(createUser);
+
+/**
+ * login route
+ */
 authRouter.route("/login").post(login);
+
+/**
+ * logout route
+ */
 authRouter.route("/logout").post(authCheck, logout);
 
 

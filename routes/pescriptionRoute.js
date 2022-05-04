@@ -5,7 +5,7 @@ const { body, validationResult, param } = require("express-validator");
 const { authCheck } = require("../middlewares/authCheck");
 
 /**
- * Get all doctors details
+ * Get all pescriptions details
  */
 pescriptionRouter.route("/").get(authCheck, getPescriptions);
 pescriptionRouter.route("/:id").get(
@@ -25,7 +25,7 @@ pescriptionRouter.route("/:id").get(
 
 
 /**
- * Create new doctor
+ * Create new pescription
  */
 pescriptionRouter.route("/").post(
     authCheck,
@@ -61,6 +61,9 @@ pescriptionRouter.route("/").post(
     createPescription
 );
 
+/**
+ * update specific pescription
+ */
 pescriptionRouter.route("/:id").patch(
     authCheck,
     // patient id must be string
@@ -84,6 +87,9 @@ pescriptionRouter.route("/:id").patch(
     updatePescription
 );
 
+/**
+ * delete specific pescription
+ */
 pescriptionRouter.route("/:id").delete(
     authCheck,
     // id must be a string
