@@ -9,7 +9,7 @@ const getPescriptions = async (req, res) => {
     const count = parseInt(req.query.count) || 100;
 
     try{
-        res.status(200).json(await pescription.getPescription(page, count));
+        res.status(200).json(await pescription.getPescriptions(page, count));
     } catch (err) {
         logger.error(err);
         res.status(400).json(err).send();
