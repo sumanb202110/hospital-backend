@@ -10,6 +10,7 @@ const logger = require("../logger");
  */
 const getPescriptions = async (page, count) => {
     try {
+        // pagination
         const snapshot = await Pescription
             .offset((page - 1) * count)
             .limit(count)

@@ -12,22 +12,27 @@ const getDoctors = async (page, count, sortBy, name, location) => {
     try {
         let snapshot = await Doctor;
 
+        // check name and include nmae filter with query
         if (name != undefined && name != "") {
             snapshot = await snapshot.where("name", "==", name);
         }
 
+        // check location and iclude location filter with query
         if (location != undefined && location != "") {
             snapshot = await snapshot
                 .where("location", "==", location);
         }
 
+        // check name and include sort with name query
         if (sortBy == "name" && !(name != undefined && name != "")) {
             snapshot = await snapshot.orderBy("name");
 
+        // check location and include sort with location query
         } else if (sortBy == "location" && !(location != undefined && location != "")) {
             snapshot = await snapshot.orderBy("location");
         }
 
+        // pagination
         snapshot = await snapshot
             .offset((page - 1) * count)
             .limit(count)

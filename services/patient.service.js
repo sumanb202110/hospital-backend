@@ -12,16 +12,19 @@ const getPatients = async (page, count, sortBy, name) => {
     try {
         let snapshot = await Patient;
 
+        // check name and include name filter
         if (name != undefined && name != "") {
             snapshot = await snapshot.where("name", "==", name);
         }
 
 
+        // check name and include name sort
         if (sortBy == "name" && !(name != undefined && name != "")) {
             snapshot = await snapshot.orderBy("name");
 
         }
 
+        // pagination
         snapshot = await snapshot
             .offset((page - 1) * count)
             .limit(count)

@@ -37,6 +37,7 @@ const login = async (req, res) => {
  */
 const logout = async(req, res) => {
     try{
+        // revoke token
         await user.revokeToken(req.uid);
         res.status(200).send();
     }catch(err){

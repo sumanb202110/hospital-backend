@@ -17,9 +17,11 @@ const authCheck = async (req, res, next) => {
             }).send();
         }
 
+        // retrive token
         const authHeader = req?.headers["authorization"];
         const idToken = authHeader && authHeader.split("Bearer ")[1];
 
+        // check valid token
         if (idToken == null) {
             return res.status(401).json({
                 msg: "unauthorized access"

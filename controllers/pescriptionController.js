@@ -83,6 +83,7 @@ const updatePescription = async (req, res) => {
             temp: req.body.temp,
             bp: req.body.bp
         };
+        // check doctor and patient details
         const doctorData = await getDoctorById(PescriptionData.doctorId);
         const patientData = await getPatientById(PescriptionData.patientId);
         if(doctorData.name != "" && doctorData.name != undefined){
