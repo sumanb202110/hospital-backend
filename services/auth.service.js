@@ -1,4 +1,4 @@
-const { auth } = require("../firebase");
+const {auth} = require("../firebase");
 const axios = require("axios");
 const logger = require("../logger");
 
@@ -7,36 +7,37 @@ const login = async (email, password) => {
     //eslint-disable-next-line
     const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.FIREBASE_API_KEY}`;
 
-    try{
+    try {
         const response = await axios.post(url,{
             "email": email,
             "password": password,
             "returnSecureToken": true
         });
+        
         return response.data;
-    }catch(err){
+    } catch (err) {
         logger.error("login error", err);
     }
 };
 
 const createUser = async (email, password, name) => {
-    try{
+    try {
         const response = await auth.createUser({
             email: email,
             password: password,
             displayName: name
         });
         return response;
-    }catch(error){
+    } catch (error) {
         logger.error("Error creating new user:", error);
     }
 };
 
 const revokeToken = async (uid) => {
-    try{
+    try {
         await auth.revokeRefreshTokens(uid);
-        return; 
-    }catch(err){
+        return;
+    } catch (err) {
         logger.error(err);
     }
 };
