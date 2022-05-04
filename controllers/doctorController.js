@@ -1,7 +1,12 @@
 const doctor = require("../services/doctor.service");
 const logger = require("../logger");
 
-
+/**
+ * get doctors 
+ * 
+ * @param {object} req 
+ * @param {object} res 
+ */
 const getDoctors = async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const count = parseInt(req.query.count) || 100;
@@ -20,6 +25,12 @@ const getDoctors = async (req, res) => {
     }
 };
 
+/**
+ * get doctors by id 
+ * 
+ * @param {object} req 
+ * @param {object} res 
+ */
 const getDoctorById = async (req, res) => {
     try{
         res.status(200).json(await doctor.getDoctorById(req.params.id));
@@ -29,6 +40,12 @@ const getDoctorById = async (req, res) => {
     }
 };
 
+/**
+ * create new doctors
+ * 
+ * @param {object} req 
+ * @param {object} res 
+ */
 const createDoctor = async (req, res) => {
     try{
         const DoctorData = {
@@ -48,6 +65,12 @@ const createDoctor = async (req, res) => {
     }
 };
 
+/**
+ * update specific doctor details
+ * 
+ * @param {object} req 
+ * @param {object} res 
+ */
 const updateDoctor = async (req, res) => {
     try{
         const DoctorData = {
@@ -67,6 +90,12 @@ const updateDoctor = async (req, res) => {
     }
 };
 
+/**
+ * delete specific doctor
+ * 
+ * @param {object} req 
+ * @param {object} res 
+ */
 const deleteDoctor = async (req, res) => {
     try{
         res.status(204).json(await doctor.deleteDoctor(req.params.id));
@@ -75,6 +104,7 @@ const deleteDoctor = async (req, res) => {
         res.status(400).json(err).send();
     }
 };
+
 module.exports = {
     getDoctors,
     getDoctorById,

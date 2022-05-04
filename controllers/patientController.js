@@ -2,6 +2,11 @@ const patient = require("../services/patient.service");
 const logger = require("../logger");
 
 
+/**
+ * Get specific doctors details
+ * @param {object} req 
+ * @param {object} res 
+ */
 const getPatients = async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const count = parseInt(req.query.count) || 100;
@@ -16,6 +21,12 @@ const getPatients = async (req, res) => {
     }
 };
 
+/**
+ * get specific patient details by id
+ * 
+ * @param {object} req 
+ * @param {object} res 
+ */
 const getPatientById = async (req, res) => {
     try{
         res.status(200).json(await patient.getPatientById(req.params.id));
@@ -25,6 +36,12 @@ const getPatientById = async (req, res) => {
     }
 };
 
+/**
+ * Create new patient
+ * 
+ * @param {object} req 
+ * @param {object} res 
+ */
 const createPatient = async (req, res) => {
     try{
         const PatientData = {
@@ -43,6 +60,12 @@ const createPatient = async (req, res) => {
     }
 };
 
+/**
+ * update specific patient details
+ * 
+ * @param {object} req 
+ * @param {object} res 
+ */
 const updatePatient = async (req, res) => {
     try{
         const PatientData = {
@@ -61,6 +84,12 @@ const updatePatient = async (req, res) => {
     }
 };
 
+/**
+ * delete specific patient
+ * 
+ * @param {object} req 
+ * @param {object} res 
+ */
 const deletePatient = async (req, res) => {
     try{
         res.status(204).json(await patient.deletePatient(req.params.id));

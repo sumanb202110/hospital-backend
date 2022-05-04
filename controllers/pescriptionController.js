@@ -3,7 +3,12 @@ const logger = require("../logger");
 const { getDoctorById } = require("../services/doctor.service");
 const { getPatientById } = require("../services/patient.service");
 
-
+/**
+ * get pescriptions
+ * 
+ * @param {object} req 
+ * @param {object} res 
+ */
 const getPescriptions = async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const count = parseInt(req.query.count) || 100;
@@ -16,6 +21,12 @@ const getPescriptions = async (req, res) => {
     }
 };
 
+/**
+ * get specific pescription details by id
+ * 
+ * @param {object} req 
+ * @param {object} res 
+ */
 const getPescriptionById = async (req, res) => {
     try{
         res.status(200).json(await pescription.getPescriptionById(req.params.id));
@@ -25,6 +36,12 @@ const getPescriptionById = async (req, res) => {
     }
 };
 
+/**
+ * create new pescription
+ * 
+ * @param {obect} req 
+ * @param {object} res 
+ */
 const createPescription = async (req, res) => {
     try{
         const PescriptionData = {
@@ -50,6 +67,12 @@ const createPescription = async (req, res) => {
     }
 };
 
+/**
+ * update specific pescription details
+ * 
+ * @param {object} req 
+ * @param {object} res 
+ */
 const updatePescription = async (req, res) => {
     try{
         const PescriptionData = {
@@ -73,6 +96,12 @@ const updatePescription = async (req, res) => {
     }
 };
 
+/**
+ * delete specific pescription 
+ * 
+ * @param {object} req 
+ * @param {object} res 
+ */
 const deletePescription = async (req, res) => {
     try{
         res.status(204).json(await pescription.deletePescription(req.params.id));
@@ -81,6 +110,7 @@ const deletePescription = async (req, res) => {
         res.status(400).json(err).send();
     }
 };
+
 module.exports = {
     getPescriptions,
     getPescriptionById,

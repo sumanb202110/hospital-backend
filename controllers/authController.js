@@ -1,5 +1,12 @@
 const user = require("../services/auth.service");
 
+
+/**
+ * Create new user
+ * 
+ * @param {object} req 
+ * @param {object} res 
+ */
 const createUser = async (req, res) => {
     try{
         res.status(201).json(await user.createUser(req.body.email, req.body.password, req.body.name));
@@ -8,6 +15,12 @@ const createUser = async (req, res) => {
     }
 };
 
+/**
+ * Login 
+ * 
+ * @param {object} req 
+ * @param {object} res 
+ */
 const login = async (req, res) => {
     try{
         res.status(200).json(await user.login(req.body.email, req.body.password));
@@ -16,6 +29,12 @@ const login = async (req, res) => {
     }
 };
 
+/**
+ * logout function
+ * 
+ * @param {object} req 
+ * @param {object} res 
+ */
 const logout = async(req, res) => {
     try{
         await user.revokeToken(req.uid);
