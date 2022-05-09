@@ -12,6 +12,10 @@
   ],
   "tags": [
     {
+      "name": "Auth",
+      "description": "Auth apis"
+    },
+    {
       "name": "Doctors",
       "description": "Doctors apis"
     },
@@ -25,9 +29,175 @@
     }
   ],
   "paths": {
+    "/api/v1/auth/login": {
+      "description": "login",
+      "post": {
+        "summary": "login",
+        "tags": [
+          "Auth"
+        ],
+        "description": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/user"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "description": "message",
+                      "example": "token"
+                    },
+                    "refreshToken": {
+                      "type": "string",
+                      "description": "message",
+                      "example": "refresh token"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "description": "message",
+                      "example": "message"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/signup": {
+      "description": "Create user",
+      "post": {
+        "summary": "create user",
+        "tags": [
+          "Auth"
+        ],
+        "description": "Create user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/user"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "description": "message",
+                      "example": "Succssfully created"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized Error"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/logout": {
+      "description": "Logout",
+      "post": {
+        "security": [
+          {
+            "BearerAuth": [
+              "read",
+              "write"
+            ]
+          }
+        ],
+        "summary": "logout",
+        "tags": [
+          "Auth"
+        ],
+        "description": "Logout",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "msg": {
+                      "type": "string",
+                      "description": "message",
+                      "example": "Logout"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized Error"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/api/v1/doctors": {
       "description": "doctor",
       "get": {
+        "security": [
+          {
+            "BearerAuth": [
+              "read"
+            ]
+          }
+        ],
         "summary": "get doctors details",
         "tags": [
           "Doctors"
@@ -123,6 +293,14 @@
         }
       },
       "post": {
+        "security": [
+          {
+            "BearerAuth": [
+              "read",
+              "write"
+            ]
+          }
+        ],
         "summary": "create doctor",
         "tags": [
           "Doctors"
@@ -181,6 +359,13 @@
         }
       ],
       "get": {
+        "security": [
+          {
+            "BearerAuth": [
+              "read"
+            ]
+          }
+        ],
         "summary": "get doctors details",
         "tags": [
           "Doctors"
@@ -206,6 +391,14 @@
         }
       },
       "patch": {
+        "security": [
+          {
+            "BearerAuth": [
+              "read",
+              "write"
+            ]
+          }
+        ],
         "summary": "update doctor",
         "tags": [
           "Doctors"
@@ -250,6 +443,14 @@
         }
       },
       "delete": {
+        "security": [
+          {
+            "BearerAuth": [
+              "read",
+              "write"
+            ]
+          }
+        ],
         "summary": "delete doctors details",
         "tags": [
           "Doctors"
@@ -271,6 +472,13 @@
     "/api/v1/patients": {
       "description": "patient",
       "get": {
+        "security": [
+          {
+            "BearerAuth": [
+              "read"
+            ]
+          }
+        ],
         "summary": "get patients details",
         "tags": [
           "Patients"
@@ -356,6 +564,14 @@
         }
       },
       "post": {
+        "security": [
+          {
+            "BearerAuth": [
+              "read",
+              "write"
+            ]
+          }
+        ],
         "summary": "create patient",
         "tags": [
           "Patients"
@@ -414,6 +630,13 @@
         }
       ],
       "get": {
+        "security": [
+          {
+            "BearerAuth": [
+              "read"
+            ]
+          }
+        ],
         "summary": "get patients details",
         "tags": [
           "Patients"
@@ -439,6 +662,14 @@
         }
       },
       "patch": {
+        "security": [
+          {
+            "BearerAuth": [
+              "read",
+              "write"
+            ]
+          }
+        ],
         "summary": "update patient",
         "tags": [
           "Patients"
@@ -483,6 +714,14 @@
         }
       },
       "delete": {
+        "security": [
+          {
+            "BearerAuth": [
+              "read",
+              "write"
+            ]
+          }
+        ],
         "summary": "delete patient details",
         "tags": [
           "Patients"
@@ -504,6 +743,13 @@
     "/api/v1/pescriptions": {
       "description": "pescription",
       "get": {
+        "security": [
+          {
+            "BearerAuth": [
+              "read"
+            ]
+          }
+        ],
         "summary": "get pescriptions details",
         "tags": [
           "Pescriptions"
@@ -568,6 +814,14 @@
         }
       },
       "post": {
+        "security": [
+          {
+            "BearerAuth": [
+              "read",
+              "write"
+            ]
+          }
+        ],
         "summary": "create pescription",
         "tags": [
           "Pescriptions"
@@ -626,6 +880,13 @@
         }
       ],
       "get": {
+        "security": [
+          {
+            "BearerAuth": [
+              "read"
+            ]
+          }
+        ],
         "summary": "get pescriptions details",
         "tags": [
           "Pescriptions"
@@ -651,6 +912,14 @@
         }
       },
       "patch": {
+        "security": [
+          {
+            "BearerAuth": [
+              "read",
+              "write"
+            ]
+          }
+        ],
         "summary": "update pescription",
         "tags": [
           "Pescriptions"
@@ -695,6 +964,14 @@
         }
       },
       "delete": {
+        "security": [
+          {
+            "BearerAuth": [
+              "read",
+              "write"
+            ]
+          }
+        ],
         "summary": "delete pescription details",
         "tags": [
           "Pescriptions"
@@ -715,7 +992,26 @@
     }
   },
   "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
     "schemas": {
+      "user": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "suman@gt.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "demo password"
+          }
+        }
+      },
       "doctor": {
         "type": "object",
         "properties": {
